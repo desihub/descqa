@@ -174,7 +174,7 @@ def run(tasks, validations_to_run, catalogs_to_run, log):
             Reader = quick_import(catalog.reader)
             gc = Reader(**catalog.kwargs)
         if catcher.has_exception:
-            log.error('error occured when loading "{}" catalog...'.format(catalog_name))
+            log.error('error occurred when loading "{}" catalog...'.format(catalog_name))
             log.debug('stdout/stderr and traceback:\n' + catcher.output)
             gc = catcher.output
         elif catcher.output:
@@ -199,7 +199,7 @@ def run(tasks, validations_to_run, catalogs_to_run, log):
                     ValidationTest = quick_import(validation.module)
                     vt = ValidationTest(**validation.kwargs)
                 if catcher.has_exception:
-                    log.error('error occured when preparing "{}" test'.format(validation_name))
+                    log.error('error occurred when preparing "{}" test'.format(validation_name))
                     log.debug('stdout/stderr and traceback:\n' + catcher.output)
                     vt = catcher.output
                 elif catcher.output:
@@ -225,7 +225,7 @@ def run(tasks, validations_to_run, catalogs_to_run, log):
             if catcher.output:
                 write_to_traceback(catcher.output)
                 if catcher.has_exception:
-                    log.error('error occured when running "{}" test on "{}" catalog...'.format(validation_name, catalog_name))
+                    log.error('error occurred when running "{}" test on "{}" catalog...'.format(validation_name, catalog_name))
                     log.debug('stdout/stderr and traceback:\n' + catcher.output)
                     tasks.set_status(validation_name, catalog_name, 'RUN_VALIDATION_TEST_ERROR')
                     continue
@@ -257,7 +257,7 @@ def run(tasks, validations_to_run, catalogs_to_run, log):
             vt.plot_summary(pjoin(tasks.get_path(validation), 'summary_plot.png'), catalog_list)
 
         if catcher.has_exception:
-            log.error('error occured when generating summary plot for "{}" test...'.format(validation))
+            log.error('error occurred when generating summary plot for "{}" test...'.format(validation))
             log.debug('stdout/stderr and traceback:\n' + catcher.output)
         elif catcher.output:
             log.debug('stdout/stderr while generating summary plot for "{}" test:\n'.format(validation) + catcher.output)
@@ -387,7 +387,7 @@ def main(args):
         write_master_status(master_status, tasks, output_dir)
         report = get_status_report(tasks)
         log.info('All done! Status report:\n' + report)
-        log.info('Web output: https://portal.nersc.gov/project/lsst/descqa/index.cgi?run={}'.format(os.path.basename(output_dir)))
+        log.info('Web output: https://portal.nersc.gov/project/lsst/descqa/v1/index.cgi?run={}'.format(os.path.basename(output_dir)))
     
     finally:
         os.unlink(pjoin(output_dir, '.lock'))
@@ -400,13 +400,13 @@ if __name__ == '__main__':
     parser.add_argument('-v', '--verbose', action='store_true', \
             help='display all debug messages')
     parser.add_argument('-m', '--comment', \
-            help='attact a comment to this run')
+            help='attach a comment to this run')
     parser.add_argument('--rv', '--validations-to-run', dest='validations_to_run', metavar='VALIDATION', nargs='+', \
-            help='If set, no sub directory will be created, and in this case, `root_output_dir` must not yet exist.')
+            help='run only a subset of validations')
     parser.add_argument('--rc', '--catalogs-to-run', dest='catalogs_to_run', metavar='CATALOG', nargs='+', \
             help='run only a subset of catalogs')
     parser.add_argument('--validation-config-file', dest='validation_config', default='config_validation.py', \
-            help='run only a subset of validations')
+            help='validation config file (default: config_validation.py)')
     parser.add_argument('--catalog-config-file', dest='catalog_config', default='config_catalog.py', \
             help='catalog config file (default: config_catalog.py)')
     parser.add_argument('--validation-code-dir', default='validation_code', \
@@ -420,7 +420,7 @@ if __name__ == '__main__':
     parser.add_argument('--source-dir', default='.', \
             help='source directory (default: current working directory)')
     parser.add_argument('--no-subdir', dest='subdir', action='store_false', \
-            help='validation config file (default: config_validation.py)')
+            help='If set, no sub directory will be created, and in this case, `root_output_dir` must not yet exist.')
     args = parser.parse_args()
     main(args)
 
