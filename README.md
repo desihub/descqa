@@ -1,11 +1,10 @@
 # DESCQA
 
-This repository contains the DESCQA framework that validates simulated galaxy catalogs. For more information about this framework, please check out the [DESCQA paper](https://arxiv.org/abs/1709.09665).
+This repository contains the DESI fork of the DESCQA framework that validates simulated galaxy catalogs. For more information about this framework, please check out the [DESCQA paper](https://arxiv.org/abs/1709.09665).
 
 A [web interface](https://portal.nersc.gov/project/lsst/descqa/) hosted on NERSC displays recent validation results from the DESCQA framework.
 
 **! Important !** Starting from DESCQA v2 (current version), we have separated the configurations and readers of catalogs from DESCQA and moved them to a standalone repo, the [GCRCatalogs](https://github.com/LSSTDESC/gcr-catalogs) repo. We have also changed much of the validation tests. If you are looking for the catalogs and tests in DESCQA v1 (as presented in the [companion paper](https://arxiv.org/abs/1709.09665)), please see the [v1 subdiectory](v1).
-
 
 ## How to run DESCQA?
 
@@ -16,7 +15,7 @@ _Note: You need to run DESCQA on a NERSC machine._
 On NERSC,
 
     cd your/own/directory
-    git clone https://github.com/LSSTDESC/descqa.git
+    git clone https://github.com/j-dr/descqa.git
 
 
 ### Step 2: Run the master script
@@ -24,9 +23,9 @@ On NERSC,
 Make sure you are in your local descqa clone on NERSC:
 
     cd your/own/directory/descqa
+    git checkout desi
 
 Then you can simply run `./run_master.sh`; however, there are many useful options to be aware of.
-
 
 #### master script options
 
@@ -76,7 +75,7 @@ Once you have a forked repo, make a local clone on NERSC:
     cd /your/own/directory
     git clone git@github.com:YourGitHubUsername/descqa.git
     cd descqa
-    git remote add upstream https://github.com/LSSTDESC/descqa.git
+    git remote add upstream https://github.com/j-dr/descqa.git
 
 _Note_: If you don't have a GitHub ssh key set up, replace `git@github.com:YourGitHubUsername/descqa.git` with `https://github.com/YourGitHubUsername/descqa.git` in the second line.
 
@@ -86,9 +85,9 @@ _Note_: If you don't have a GitHub ssh key set up, replace `git@github.com:YourG
 _Note_: Do *not* skip this step!
 
     cd /your/own/directory/descqa
-    git checkout master
-    git pull upstream master
-    git push origin master
+    git checkout desi
+    git pull upstream desi
+    git push origin desi
 
 
 ### Step 3: Create a new branch
@@ -135,7 +134,7 @@ First, push your changes to GitHub
 
     git push origin newBranchName
 
-Then go to https://github.com/LSSTDESC/descqa/ to create a pull request.
+Then go to https://github.com/j-dr/descqa/ to create a pull request.
 
 
 
@@ -167,7 +166,6 @@ Then go to https://github.com/LSSTDESC/descqa/ to create a pull request.
 
 ### Additional dependencies For v1
 
-- Python 2.7 only
 - kcorrect
 - fast3tree
 - https://bitbucket.org/yymao/helpers

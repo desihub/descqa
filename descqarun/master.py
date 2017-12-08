@@ -14,7 +14,7 @@ import subprocess
 
 try:
     from StringIO import StringIO
-except ModuleNotFoundError:
+except ImportError:
     from io import StringIO
 
 import yaml
@@ -320,6 +320,7 @@ class DescqaTask(object):
     def run_tests(self):
         run_at_least_one_catalog = False
         for catalog in self.catalogs_to_run:
+            print('catalog: {}'.format(catalog))
             catalog_instance = self.get_catalog_instance(catalog)
             if catalog_instance is None:
                 continue
@@ -418,6 +419,7 @@ def main():
     if args.paths:
         sys.path = [make_path_absolute(path) for path in args.paths] + sys.path
 
+    print(sys.path)
     global GCRCatalogs
     GCRCatalogs = importlib.import_module('GCRCatalogs')
 

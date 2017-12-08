@@ -7,17 +7,19 @@
 set -e
 
 # activate python env
-PYTHON="/global/common/cori/contrib/lsst/apps/anaconda/py3-envs/DESCQA/bin/python"
-
+source /project/projectdirs/desi/software/desi_environment.sh
+export PYTHONPATH=/global/homes/j/jderose/desi/mocks/desiqa/cori/lib/python3.5/site-packages/:$PYTHONPATH
 # set output directory
-OUTPUTDIR="/global/projecta/projectdirs/lsst/groups/CS/descqa/run/v2"
+OUTPUTDIR="/project/projectdirs/desi/mocks/desiqa/run/"
+
 
 # to allow wildcards in arguments go to master.py
 set -o noglob
 
 # run master.py
+echo $PYTHONPATH
 CMD="import descqarun; descqarun.main()"
-$PYTHON -E -c "$CMD" "$OUTPUTDIR" "$@"
+python -E -c "$CMD" "$OUTPUTDIR" "$@"
 
 # end subshell
 )
