@@ -10,7 +10,7 @@ set -e
 PYTHON="/global/common/software/lsst/common/miniconda/py3-4.2.12/bin/python"
 
 # set output directory
-OUTPUTDIR="/global/projecta/projectdirs/lsst/groups/CS/descqa/run/v2"
+OUTPUTDIR="/global/project/projectdirs/desi/www/users/desiqa/run"
 
 # to allow wildcards in arguments go to master.py
 set -o noglob
